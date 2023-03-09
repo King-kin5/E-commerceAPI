@@ -1,23 +1,28 @@
 package com.Api.Entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NonNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "category")
-@Setter
-@Getter
+@Data
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @NotNull(message = "Name cannot be empty")
-    private String Name;
-    @OneToMany (mappedBy = "Category",cascade = CascadeType.ALL)
-    private List<Product>products;
+    @NonNull
+    @Column(name = "category_name")
+    @NotBlank(message = "Category name cannot be blank")
+    private String categoryName;
+    @NonNull
+    @NotBlank(message= "description cannot be blank")
+    private String description;
+
+    @NonNull
+    @NotBlank(message= "image url cannot be blank")
+    private String imageUrl;
 }
