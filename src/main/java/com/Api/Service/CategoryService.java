@@ -19,10 +19,7 @@ public class CategoryService {
     }
 
     public Category createCategory(CategoryDTO categoryDTO) {
-        Category category=new Category();
-        categoryDTO.setId(category.getId());
-        categoryDTO.setCategoryName(category.getCategoryName());
-        categoryDTO.setDescription(categoryDTO.getDescription());
+        Category category= getCategoryFromDto(categoryDTO);
 
         categoryRepository.save(category);
         return category;
@@ -49,5 +46,13 @@ public class CategoryService {
     public void deleteCategory(Integer categoryId){
         Category category = categoryRepository.findById(categoryId).get();
         categoryRepository.delete(category);
+    }
+
+    public Category getCategoryFromDto(CategoryDTO categoryDTO){
+        Category category = new Category();
+
+        category.setCategoryName(categoryDTO.getCategoryName());
+        category.setDescription(categoryDTO.getDescription());
+        return category;
     }
 }
