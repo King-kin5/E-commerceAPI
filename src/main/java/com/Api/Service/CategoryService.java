@@ -1,5 +1,6 @@
 package com.Api.Service;
 
+import com.Api.DTO.CategoryDTO;
 import com.Api.Entity.Category;
 import com.Api.Repository.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,14 @@ public class CategoryService {
         return (List<Category>) categoryRepository.findAll();
     }
 
-    public void createCategory(Category category) {
+    public Category createCategory(CategoryDTO categoryDTO) {
+        Category category=new Category();
+        categoryDTO.setId(category.getId());
+        categoryDTO.setCategoryName(category.getCategoryName());
+        categoryDTO.setDescription(categoryDTO.getDescription());
+
         categoryRepository.save(category);
+        return category;
     }
 
     public Category readCategory(String categoryName) {
@@ -35,7 +42,7 @@ public class CategoryService {
         Category oldCategory = categoryRepository.findById(categoryId).get();
         oldCategory.setCategoryName(newCategory.getCategoryName());
         oldCategory.setDescription(newCategory.getDescription());
-        oldCategory.setImageUrl(newCategory.getImageUrl());
+
         categoryRepository.save(oldCategory);
     }
 

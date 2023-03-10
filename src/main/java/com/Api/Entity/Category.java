@@ -1,14 +1,14 @@
 package com.Api.Entity;
 
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "category")
-@Data
+@Getter
+@Setter
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,4 @@ public class Category {
     @NotBlank(message= "description cannot be blank")
     private String description;
 
-    @NonNull
-    @NotBlank(message= "image url cannot be blank")
-    private String imageUrl;
 }

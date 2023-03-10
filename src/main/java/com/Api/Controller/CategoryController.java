@@ -1,5 +1,6 @@
 package com.Api.Controller;
 
+import com.Api.DTO.CategoryDTO;
 import com.Api.Entity.Category;
 import com.Api.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +25,9 @@ public class CategoryController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<String> createCategory(@Valid @RequestBody Category category){
+    public Category createCategory(@RequestBody CategoryDTO categoryDTO){
 
-//        checking if category already exist
-        if(Objects.nonNull(categoryService.readCategory(category.getCategoryName()))){
-//            returns an unsuccessful status if category already exist
-            return new ResponseEntity<>("Category already exist",HttpStatus.CONFLICT);
-        }
-
-//        creating new category
-        categoryService.createCategory(category);
-        return new ResponseEntity<>("Created the Category",HttpStatus.CREATED);
+        return categoryService.createCategory(categoryDTO);
     }
 
     @PatchMapping("/{id}")
